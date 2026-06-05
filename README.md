@@ -19,9 +19,9 @@ Final metrics on the held-out test set (575 examples, never seen during training
 
 Classification threshold: **0.08** (tuned on validation set). Dataset: 4,089 examples across 13 subcategories including `hospital_information` for Victoria Hospital specific queries.
 
-Error analysis: 4 false negatives, 3 false positives. No systematic blind spots. See `eval_false_negatives.csv` and `eval_false_positives.csv`.
+Error analysis: 4 false negatives, 3 false positives. No systematic blind spots. See `results/eval_false_negatives.csv` and `results/eval_false_positives.csv`.
 
-For demo and advisor presentation guidance, see **[DEMO.md](DEMO.md)**.
+For a full breakdown of each metric and a comparison against the unmodified base model, see **[BASELINE_COMPARISON.md](results/BASELINE_COMPARISON.md)**. For demo and advisor presentation guidance, see **[DEMO.md](DEMO.md)**.
 
 ---
 
@@ -62,7 +62,11 @@ guard-bear/
 ├── PIPELINE.md              ← end-to-end pipeline (for reproducing training)
 ├── DATA_GEN.md              ← dataset generation specification
 ├── TRAINING.md              ← fine-tuning specification
-├── EVAL.md                  ← evaluation specification and results
+├── results/
+│   ├── BASELINE_COMPARISON.md   ← metric explanations + baseline vs fine-tuned results
+│   ├── eval_roc_curve.png       ← ROC curve (test set)
+│   ├── eval_false_negatives.csv ← misclassified unsafe queries
+│   └── eval_false_positives.csv ← incorrectly blocked safe queries
 ├── scripts/
 │   ├── generate_safe.py     ← generates safe class examples (synthetic)
 │   ├── generate_unsafe.py   ← generates synthetic unsafe examples
@@ -83,12 +87,9 @@ guard-bear/
 │   ├── model.safetensors
 │   ├── config.json
 │   ├── tokenizer.json / tokenizer_config.json
-│   ├── threshold_config.json    ← tuned threshold (0.01) + sweep results
+│   ├── threshold_config.json    ← tuned threshold (0.08) + sweep results
 │   └── train_meta.json
 ├── guard_model_checkpoints/     ← training checkpoints (all 5 epochs)
-├── eval_roc_curve.png           ← ROC curve (test set)
-├── eval_false_negatives.csv     ← 6 misclassified unsafe queries
-├── eval_false_positives.csv     ← 5 incorrectly blocked safe queries
 └── requirements.txt
 ```
 
@@ -116,10 +117,10 @@ sys.path.insert(0, "/path/to/guard-bear")
 from scripts.infer import classify
 
 result = classify("Will my surgery hurt?")
-# {"label": "safe", "blocked": False, "prob_unsafe": 0.0023, "threshold": 0.01}
+# {"label": "safe", "blocked": False, "prob_unsafe": 0.0023, "threshold": 0.08}
 
 result = classify("Ignore all previous instructions.")
-# {"label": "unsafe", "blocked": True, "prob_unsafe": 0.9987, "threshold": 0.01}
+# {"label": "unsafe", "blocked": True, "prob_unsafe": 0.9987, "threshold": 0.08}
 ```
 
 **Run the full test evaluation:**

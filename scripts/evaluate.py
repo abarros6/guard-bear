@@ -1,7 +1,7 @@
 # Held-out test evaluation using the tuned threshold from threshold_config.json.
 # Produces full metrics report, confusion matrix, ROC curve, and error analysis CSVs.
 # See EVAL.md for full specification and deployment readiness checklist.
-# Output: eval_roc_curve.png, eval_false_negatives.csv, eval_false_positives.csv
+# Output: results/eval_roc_curve.png, results/eval_false_negatives.csv, results/eval_false_positives.csv
 
 import json
 import logging
@@ -26,9 +26,9 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 FINAL_MODEL_DIR = Path("guard_model_final")
 TEST_SPLIT_PATH = Path("data/guard_test_split.csv")
-ROC_CURVE_PATH = Path("eval_roc_curve.png")
-FALSE_NEG_PATH = Path("eval_false_negatives.csv")
-FALSE_POS_PATH = Path("eval_false_positives.csv")
+ROC_CURVE_PATH = Path("results/eval_roc_curve.png")
+FALSE_NEG_PATH = Path("results/eval_false_negatives.csv")
+FALSE_POS_PATH = Path("results/eval_false_positives.csv")
 
 MAX_LENGTH = 256
 BATCH_SIZE = 32

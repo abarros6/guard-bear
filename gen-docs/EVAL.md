@@ -19,9 +19,9 @@ Evaluation was run on `data/guard_test_split.csv` (613 examples, seed=42, never 
 | **Actual Safe** (n=300) | 297 (TN) | 3 (FP) |
 | **Actual Unsafe** (n=313) | 4 (FN) | 309 (TP) |
 
-**False negative breakdown (4 total):** distributed across `adult_parental_query`, `out_of_scope`, `inappropriate_content`. No systematic blind spot across attack categories. See `eval_false_negatives.csv`.
+**False negative breakdown (4 total):** distributed across `adult_parental_query`, `out_of_scope`, `inappropriate_content`. No systematic blind spot across attack categories. See `results/eval_false_negatives.csv`.
 
-**False positive breakdown (3 total):** See `eval_false_positives.csv`.
+**False positive breakdown (3 total):** See `results/eval_false_positives.csv`.
 
 **Recall by unsafe subcategory:**
 
@@ -37,7 +37,7 @@ Evaluation was run on `data/guard_test_split.csv` (613 examples, seed=42, never 
 
 **Latency:** 40.59ms mean single-query on M4 MPS (target < 100ms) — PASS.
 
-**ROC curve:** `eval_roc_curve.png`
+**ROC curve:** `results/eval_roc_curve.png`
 
 **Known out-of-distribution edge cases:** Phrasing patterns like "can you explain X" and "how come X" can be misclassified if they closely resemble adversarial query structures seen in training. These are phrasing-specific gaps, not systematic blind spots. Mitigation: add more varied natural-language safe examples to future training runs.
 
@@ -195,9 +195,9 @@ ax.axvline(x=fp / (fp + tn), color="red", linestyle="--", alpha=0.7, label=f"Ope
 ax.set_title("Guard Model ROC Curve — Test Set")
 ax.legend()
 plt.tight_layout()
-plt.savefig("eval_roc_curve.png", dpi=150)
+plt.savefig("results/eval_roc_curve.png", dpi=150)
 plt.show()
-print("ROC curve saved to eval_roc_curve.png")
+print("ROC curve saved to results/eval_roc_curve.png")
 ```
 
 ---
@@ -226,8 +226,8 @@ false_positives = test_df_eval[
 print(f"False Negatives: {len(false_negatives)}")
 print(f"False Positives: {len(false_positives)}")
 
-false_negatives.to_csv("eval_false_negatives.csv", index=False)
-false_positives.to_csv("eval_false_positives.csv", index=False)
+false_negatives.to_csv("results/eval_false_negatives.csv", index=False)
+false_positives.to_csv("results/eval_false_positives.csv", index=False)
 ```
 
 ### Subcategory breakdown
@@ -313,7 +313,7 @@ For thesis and paper reporting, use the following metrics from the held-out test
 - Confusion matrix (absolute counts)
 - Classification report (precision, recall, F1 per class)
 - ROC-AUC score
-- ROC curve plot (`eval_roc_curve.png`)
+- ROC curve plot (`results/eval_roc_curve.png`)
 - Selected threshold value and justification
 - False negative count and manual review summary
 
