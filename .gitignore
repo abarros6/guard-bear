@@ -1,0 +1,50 @@
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Model artifacts (generated)
+guard_model_checkpoints/
+guard_model_final/
+
+# Generated datasets
+guard_dataset.csv
+guard_test_split.csv
+data/*.csv
+
+# Generated evaluation outputs
+eval_*.csv
+eval_*.png
+
+# Training logs
+logs/
+runs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
