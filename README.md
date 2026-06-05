@@ -46,11 +46,6 @@ Same venv setup as above, plus:
 huggingface-cli login
 ```
 
-**Anthropic API key** — dataset generation uses the Claude API:
-```bash
-export ANTHROPIC_API_KEY=your_key_here
-```
-
 **Verify MPS (Apple Silicon):**
 ```bash
 python -c "import torch; assert torch.backends.mps.is_available(), 'MPS not available'; print('MPS OK')"
@@ -69,8 +64,8 @@ guard-bear/
 ├── TRAINING.md              ← fine-tuning specification
 ├── EVAL.md                  ← evaluation specification and results
 ├── scripts/
-│   ├── generate_safe.py     ← generates safe class examples (Claude API)
-│   ├── generate_unsafe.py   ← generates synthetic unsafe examples (Claude API)
+│   ├── generate_safe.py     ← generates safe class examples (synthetic)
+│   ├── generate_unsafe.py   ← generates synthetic unsafe examples
 │   ├── pull_datasets.py     ← pulls and filters existing HuggingFace datasets
 │   ├── assemble_dataset.py  ← merges, shuffles, and splits final CSV
 │   ├── train.py             ← full fine-tuning script

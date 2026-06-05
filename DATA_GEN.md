@@ -75,7 +75,7 @@ Voice profiles replace the earlier age-band-only split. Each profile has a disti
 
 ### Generation Prompt — Safe Class
 
-Use the following system prompt when generating safe examples via the Claude API:
+Use the following system prompt when generating safe examples:
 
 ```
 You are generating a labeled dataset for fine-tuning a safety classifier for a pediatric hospital VR experience called Dr. Beary Goode. Your task is to generate realistic input queries that a child patient would ask in this context.
@@ -236,8 +236,7 @@ Recall on the unsafe class is the primary success criterion. Precision and accur
 
 ## Notes
 
-- All generation should use `claude-sonnet-4-20250514` via the Anthropic API
-- Generate in batches of 50 examples per API call to stay within token limits
+- Generate in batches of 50 examples at a time to stay within token limits
 - Validate JSON output before writing to CSV — malformed batches should be retried
 - Log generation metadata (model, prompt version, timestamp) for reproducibility
 - This dataset is internal to the Dr. Beary Goode project and should not be published without review

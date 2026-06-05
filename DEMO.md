@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 All subsequent commands in this document assume the venv is active (`source .venv/bin/activate`). You can tell it's active because your shell prompt will show `(.venv)`.
 
-You do not need a HuggingFace token, Anthropic API key, or GPU to run inference on the pre-trained model.
+You do not need a HuggingFace token or GPU to run inference on the pre-trained model.
 
 > **Note on MPS:** If you're on Apple Silicon, inference uses MPS automatically. On other hardware it falls back to CPU cleanly — latency will be slightly higher but well under 100ms for a single query.
 
@@ -193,7 +193,7 @@ Key point: the guard is an 86M-parameter DeBERTa-v2 classifier, not another LLM.
 Key numbers to highlight:
 - 4,414 labeled examples total
 - 13 subcategories covering: safe clinical queries (6 types) and unsafe inputs (7 types)
-- Safe examples generated with Claude API, matching age-appropriate linguistic profiles for ages 5–11 and 12–18
+- Safe examples synthetically generated, matching age-appropriate linguistic profiles for ages 5–11 and 12–18
 - Unsafe examples sourced from 4 public HuggingFace datasets plus domain-specific synthetic generation for Dr. Beary Goode-specific attacks
 
 **3. Live inference demo (5 min)**
